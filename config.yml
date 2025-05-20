@@ -1,0 +1,42 @@
+# T2 Factor Clusters Configuration
+
+# Analysis parameters
+window_length: 36  # months
+corr_threshold: 0.7  # correlation threshold for cluster identification (ρ)
+edge_threshold: 0.5  # threshold for network edge creation
+random_seed: 42  # for reproducibility
+
+# Data paths
+input_file: "T2_Optimizer.xlsx"
+input_sheet: "Sheet1"
+output_paths:
+  raw: "data/raw/factors_2000_2025.parquet"
+  cleaned: "data/processed/returns_cleaned.parquet"
+  rolling_corr: "data/derived/rolling_corr.zarr"
+  cluster_labels: "data/derived/clusters/cluster_labels.parquet"
+  superclusters: "data/derived/superclusters.parquet"
+  metrics: "data/derived/metrics/structural_change_metrics.parquet"
+  pca:
+    eigenvalues: "data/derived/pca/eigenvalues.parquet"
+    eigenvectors: "data/derived/pca/eigenvectors.zarr"
+  reports:
+    final_viz: "reports/Final_Visualization_Package.pdf"
+    exec_summary: "reports/Executive_Summary.pdf"
+
+# Data cleaning parameters
+winsorize_threshold: 0.5  # 50% threshold for extreme returns
+interpolation_method: "linear"  # method for handling isolated missing values
+
+# Visualization parameters
+figure_dpi: 300
+figure_format: "pdf"
+key_periods:
+  - "2003-01"  # Normal market
+  - "2008-10"  # Financial crisis
+  - "2020-03"  # COVID-19 crash
+  - "2022-06"  # Inflation regime
+  - "2024-01"  # Recent period
+
+# Logging configuration
+log_level: "INFO"
+log_rotation: "1 day"
